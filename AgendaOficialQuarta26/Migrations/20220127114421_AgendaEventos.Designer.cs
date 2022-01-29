@@ -4,6 +4,7 @@ using AgendaOficialQuarta26.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaOficialQuarta26.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20220127114421_AgendaEventos")]
+    partial class AgendaEventos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,6 @@ namespace AgendaOficialQuarta26.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("AgendaId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Descrição")
@@ -110,13 +111,9 @@ namespace AgendaOficialQuarta26.Migrations
 
             modelBuilder.Entity("AgendaOficialQuarta26.Models.Evento", b =>
                 {
-                    b.HasOne("AgendaOficialQuarta26.Models.Agenda", "Agenda")
+                    b.HasOne("AgendaOficialQuarta26.Models.Agenda", null)
                         .WithMany("Eventos")
-                        .HasForeignKey("AgendaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Agenda");
+                        .HasForeignKey("AgendaId");
                 });
 
             modelBuilder.Entity("AgendaOficialQuarta26.Models.Usuario", b =>
