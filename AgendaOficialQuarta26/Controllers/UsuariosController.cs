@@ -34,7 +34,7 @@ namespace AgendaOficialQuarta26.Controllers
             }
 
             var usuario = await _context.Usuario
-                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Usuarios, bool>>)(m => m.Id == id));
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
                 return NotFound();
@@ -56,13 +56,9 @@ namespace AgendaOficialQuarta26.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome")] Usuario usuario)
         {
-            
-            
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            
-        
+            _context.Add(usuario);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Usuarios/Edit/5
@@ -93,22 +89,16 @@ namespace AgendaOficialQuarta26.Controllers
                 return NotFound();
             }
 
-           
-            
-                try
-                {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                  
-                        throw;
-                   
-                }
+            try
+            {
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            
-            return View(usuario);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return View(usuario);
+            }
         }
 
         // GET: Usuarios/Delete/5
@@ -120,7 +110,7 @@ namespace AgendaOficialQuarta26.Controllers
             }
 
             var usuario = await _context.Usuario
-                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Usuarios, bool>>)(m => m.Id == id));
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
                 return NotFound();
@@ -138,11 +128,6 @@ namespace AgendaOficialQuarta26.Controllers
             _context.Usuario.Remove(usuario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool EventoExists(int id)
-        {
-            return _context.Usuario.Any((System.Linq.Expressions.Expression<Func<Usuarios, bool>>)(e => e.Id == id));
         }
     }
 }

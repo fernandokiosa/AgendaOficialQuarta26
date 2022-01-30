@@ -12,7 +12,7 @@ namespace AgendaOficialQuarta26.Models
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        public List<Agenda> Agendas{ get; set; }
+        public List<Evento> Agendas{ get; set; }
 
     }
 }

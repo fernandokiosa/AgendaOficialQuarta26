@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -34,13 +35,13 @@ namespace AgendaOficialQuarta26.Controllers
             }
 
             var agenda = await _context.Agenda
-                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Agendas, bool>>)(m => m.Id == id));
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (agenda == null)
             {
                 return NotFound();
             }
 
-            return View(agenda);
+            return View((Agenda)agenda);
         }
 
         // GET: Agendas/Create
@@ -54,15 +55,15 @@ namespace AgendaOficialQuarta26.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome")] Agendas agenda)
+        public async Task<IActionResult> Create([Bind("Nome")] Agenda agenda)
         {
-            
-            
-                _context.Add(agenda);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            
-        
+
+
+            _context.Add(agenda);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+
         }
 
         // GET: Agendas/Edit/5
@@ -74,11 +75,13 @@ namespace AgendaOficialQuarta26.Controllers
             }
 
             var agenda = await _context.Agenda.FindAsync(id);
+
             if (agenda == null)
             {
                 return NotFound();
             }
-            return View(agenda);
+
+            return View((Agenda)agenda);
         }
 
         // POST: Agendas/Edit/5
@@ -86,29 +89,26 @@ namespace AgendaOficialQuarta26.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Agendas agenda)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Agenda agenda)
         {
             if (id != agenda.Id)
             {
                 return NotFound();
             }
 
-           
-            
-                try
-                {
-                    _context.Update(agenda);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                  
-                        throw;
-                   
-                }
+            try
+            {
+                _context.Update(agenda);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            
-            return View(agenda);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return View(agenda);
+            }
+
+
+
         }
 
         // GET: Agendas/Delete/5
@@ -120,13 +120,14 @@ namespace AgendaOficialQuarta26.Controllers
             }
 
             var agenda = await _context.Agenda
-                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Agendas, bool>>)(m => m.Id == id));
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (agenda == null)
             {
                 return NotFound();
             }
 
-            return View(agenda);
+            return View((Agenda)agenda);
         }
 
         // POST: Agendas/Delete/5
@@ -138,11 +139,6 @@ namespace AgendaOficialQuarta26.Controllers
             _context.Agenda.Remove(agenda);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool EventoExists(int id)
-        {
-            return _context.Agenda.Any((System.Linq.Expressions.Expression<Func<Agendas, bool>>)(e => e.Id == id));
         }
     }
 }
