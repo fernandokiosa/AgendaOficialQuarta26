@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgendaOficialQuarta26.Models
 {
-    [Table("Agenda")]
+    [Table("Usuario")]
     public class Usuario
     {
         [Column]
@@ -20,7 +20,7 @@ namespace AgendaOficialQuarta26.Models
         [Display(Name = "Senha")]
         public string Senha { get; set; }
 
-        [Column("Data de nascimento")]
+        [Column("Data_nascimento")]
         [Display(Name = "Data de nascimento")]
         public DateTime Data_nascimento { get; set; }
 
@@ -28,7 +28,7 @@ namespace AgendaOficialQuarta26.Models
         [Display(Name = "Sexo")]
         public string Sexo { get; set; }
 
-        public List<Evento> Eventos{ get; set; }
+        public List<Usuario> Eventos{ get; set; }
 
     }
 }
