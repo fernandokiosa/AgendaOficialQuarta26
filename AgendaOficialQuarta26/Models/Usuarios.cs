@@ -3,17 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AgendaOficialQuarta26.Models
 {
-    [Table("Usuario")]
+    [Table("Agenda")]
     public class Usuario
     {
-        [Key]
+        [Column]
+        [Key] 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
-        [Display(Name = "Id")]
         public int Id { get; set; }
-
-        [Column("Nome")]
-        [Display(Name = "Nome")]
         public string Nome { get; set; }
 
         [Column("Email")]
@@ -24,8 +20,15 @@ namespace AgendaOficialQuarta26.Models
         [Display(Name = "Senha")]
         public string Senha { get; set; }
 
-        [ForeignKey("AgendaId")]
-        public Agenda Agenda { get; set; }
-        public int AgendaId { get; set; }
+        [Column("Data de nascimento")]
+        [Display(Name = "Data de nascimento")]
+        public DateTime Data_nascimento { get; set; }
+
+        [Column("Sexo")]
+        [Display(Name = "Sexo")]
+        public string Sexo { get; set; }
+
+        public List<Evento> Eventos{ get; set; }
+
     }
 }

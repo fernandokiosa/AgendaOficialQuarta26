@@ -10,22 +10,22 @@ using AgendaOficialQuarta26.Models;
 
 namespace AgendaOficialQuarta26.Controllers
 {
-    public class AgendasController : Controller
+    public class UsuariosController : Controller
     {
         private readonly Contexto _context;
 
-        public AgendasController(Contexto context)
+        public UsuariosController(Contexto context)
         {
             _context = context;
         }
 
-        // GET: Agendas
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Agenda.ToListAsync());
+            return View(await _context.Usuario.ToListAsync());
         }
 
-        // GET: Agendas/Details/5
+        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace AgendaOficialQuarta26.Controllers
                 return NotFound();
             }
 
-            var agenda = await _context.Agenda
-                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Agendas, bool>>)(m => m.Id == id));
-            if (agenda == null)
+            var usuario = await _context.Usuario
+                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Usuarios, bool>>)(m => m.Id == id));
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(agenda);
+            return View(usuario);
         }
 
-        // GET: Agendas/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Agendas/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome")] Agendas agenda)
+        public async Task<IActionResult> Create([Bind("Nome")] Usuario usuario)
         {
             
             
-                _context.Add(agenda);
+                _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             
         
         }
 
-        // GET: Agendas/Edit/5
+        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace AgendaOficialQuarta26.Controllers
                 return NotFound();
             }
 
-            var agenda = await _context.Agenda.FindAsync(id);
-            if (agenda == null)
+            var usuario = await _context.Usuario.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(agenda);
+            return View(usuario);
         }
 
-        // POST: Agendas/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Agendas agenda)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Usuario usuario)
         {
-            if (id != agenda.Id)
+            if (id != usuario.Id)
             {
                 return NotFound();
             }
@@ -97,7 +97,7 @@ namespace AgendaOficialQuarta26.Controllers
             
                 try
                 {
-                    _context.Update(agenda);
+                    _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -108,10 +108,10 @@ namespace AgendaOficialQuarta26.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             
-            return View(agenda);
+            return View(usuario);
         }
 
-        // GET: Agendas/Delete/5
+        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -119,30 +119,30 @@ namespace AgendaOficialQuarta26.Controllers
                 return NotFound();
             }
 
-            var agenda = await _context.Agenda
-                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Agendas, bool>>)(m => m.Id == id));
-            if (agenda == null)
+            var usuario = await _context.Usuario
+                .FirstOrDefaultAsync((System.Linq.Expressions.Expression<Func<Usuarios, bool>>)(m => m.Id == id));
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(agenda);
+            return View(usuario);
         }
 
-        // POST: Agendas/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var agenda = await _context.Agenda.FindAsync(id);
-            _context.Agenda.Remove(agenda);
+            var usuario = await _context.Usuario.FindAsync(id);
+            _context.Usuario.Remove(usuario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EventoExists(int id)
         {
-            return _context.Agenda.Any((System.Linq.Expressions.Expression<Func<Agendas, bool>>)(e => e.Id == id));
+            return _context.Usuario.Any((System.Linq.Expressions.Expression<Func<Usuarios, bool>>)(e => e.Id == id));
         }
     }
 }
