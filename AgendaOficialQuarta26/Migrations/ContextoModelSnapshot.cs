@@ -116,9 +116,11 @@ namespace AgendaOficialQuarta26.Migrations
 
             modelBuilder.Entity("AgendaOficialQuarta26.Models.Evento", b =>
                 {
-                    b.HasOne("AgendaOficialQuarta26.Models.Agenda", null)
+                    b.HasOne("AgendaOficialQuarta26.Models.Agenda", "Agenda")
                         .WithMany("Agendas")
                         .HasForeignKey("AgendaId");
+
+                    b.Navigation("Agenda");
                 });
 
             modelBuilder.Entity("AgendaOficialQuarta26.Models.Usuario", b =>

@@ -21,5 +21,8 @@ namespace AgendaOficialQuarta26.Models
         [Column("Descrição")]
         [Display(Name = "Descrição")]
         public string Descrição { get; set; }
+
+        public Agenda? Agenda { get; set; }
+        public int? AgendaId { get; set; }
     }
 }
